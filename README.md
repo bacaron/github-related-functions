@@ -1,9 +1,9 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.436-blue.svg)](https://doi.org/https://doi.org/10.25663/brainlife.app.436)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.439-blue.svg)](https://doi.org/https://doi.org/10.25663/brainlife.app.439)
 
-# Compile measures from dsistudio tractmeasures datatype
+# Compute macro-structural statistics of tracts using Dipy
 
-This app will This app will compile the tsv outputs for each tract from dsistudio into a single csv to ease downstream analyses. This is done using python, specifically nibabel, pandas and numpy.
+This app will This app will compute macro-structural statistics of white matter tracts, including tract volume, length, and streamline count, and will output the data into a single csv for downstream analyses. This is done using Dipy.
 
 ### Authors
 
@@ -29,7 +29,7 @@ We kindly ask that you cite the following articles when publishing papers and co
 
 1. Avesani, P., McPherson, B., Hayashi, S. et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6, 69 (2019). https://doi.org/10.1038/s41597-019-0073-y
 
-2. Yeh, Fang-cheng. 'Shape Analysis of the Human Association Pathways.' Neuroimage (2020).
+2. Garyfallidis E, Brett M, Amirbekian B, Rokem A, van der Walt S, Descoteaux M, Nimmo-Smith I and Dipy Contributors (2014). DIPY, a library for the analysis of diffusion MRI data. Frontiers in Neuroinformatics, vol.8, no.8.
 
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
 
@@ -37,7 +37,7 @@ We kindly ask that you cite the following articles when publishing papers and co
 
 ### On Brainlife.io
 
-You can submit this App online at [https://doi.org/https://doi.org/10.25663/brainlife.app.436](https://doi.org/https://doi.org/10.25663/brainlife.app.436) via the 'Execute' tab.
+You can submit this App online at [https://doi.org/https://doi.org/10.25663/brainlife.app.439](https://doi.org/https://doi.org/10.25663/brainlife.app.439) via the 'Execute' tab.
 
 ### Running Locally (on your machine)
 
@@ -47,7 +47,11 @@ You can submit this App online at [https://doi.org/https://doi.org/10.25663/brai
 
 ```json
 {
-	"tractmeasures": "/input/tractmeasures/"
+	"track": "/input/track/track.tck",
+	"classification": "/input/wmc/classification.mat",
+	"dwi": "/input/dwi/dwi.nii.gz",
+	"bvals": "/input/dwi/dwi.bvals",
+	"bvecs": "/input/dwi/dwi.bvecs"
 }
 ```
 
@@ -65,12 +69,12 @@ bl dataset download
 3. Launch the App by executing 'main'
 
 ```bash
-./main 
+./main
 ```
 
 ## Output
 
-The main output of this App is a tractmeasures datatype containing a csv with the statistics for each tract combined.
+The main output of this App is a tractmeasures datatype containing a csv of the macrostructural statistics of all the white matter tracts found in the wmc datatype.
 
 #### Product.json
 
@@ -80,8 +84,6 @@ The secondary output of this app is `product.json`. This file allows web interfa
 
 This App only requires [singularity](https://www.sylabs.io/singularity/) to run. If you don't have singularity, you will need to install following dependencies.   
 
-- nibabel: https://nipy.org/nibabel/
-- numpy: https://numpy.org/
-- pandas: https://pandas.pydata.org/
+- Dipy: https://dipy.org/
 
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
