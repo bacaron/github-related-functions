@@ -1,9 +1,9 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.553-blue.svg)](https://doi.org/10.25663/brainlife.app.553)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.478-blue.svg)](https://doi.org/10.25663/brainlife.app.478)
 
-# Compute summary statistics of diffusion measures from Parcellation (volume)
+# Compute myelin map using T1w / T2w ratio
 
-This app will compute statistics from diffusion measures inside a parcellation. Will return volume, thickness, and mean diffusion measures for each ROI in a parcellation. Can also take in myelin-map and qmri datatypes as inputs. Uses Freesurfer to compute the statistics.
+This app will compute a myelin-map by computing the ratio between the T1w and T2w images following methodologies outlined in Glasser et al (2011).
 
 ### Authors
 
@@ -11,11 +11,11 @@ This app will compute statistics from diffusion measures inside a parcellation. 
 
 ### Contributors
 
-- Soichi Hayashi (shayashi@iu.edu)
+- Soichi Hayashi(shayashi@iu.edu)
 
 ### Funding Acknowledgement
 
-brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code.
+brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code. 
 
 [![NSF-BCS-1734853](https://img.shields.io/badge/NSF_BCS-1734853-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1734853)
 [![NSF-BCS-1636893](https://img.shields.io/badge/NSF_BCS-1636893-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1636893)
@@ -23,13 +23,13 @@ brainlife.io is publicly funded and for the sustainability of the project it is 
 [![NSF-IIS-1912270](https://img.shields.io/badge/NSF_IIS-1912270-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1912270)
 [![NIH-NIBIB-R01EB029272](https://img.shields.io/badge/NIH_NIBIB-R01EB029272-green.svg)](https://grantome.com/grant/NIH/R01-EB029272-01)
 
-### Citations 
+### Citations
 
 We kindly ask that you cite the following articles when publishing papers and code using this code.
 
 1. Avesani, P., McPherson, B., Hayashi, S. et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6, 69 (2019). https://doi.org/10.1038/s41597-019-0073-y
 
-2. Dale, A.M., Fischl, B., Sereno, M.I., 1999. Cortical surface-based analysis. I. Segmentation and surface reconstruction. Neuroimage 9, 179-194.
+2. Glasser MF, Van Essen DC. Mapping human cortical areas in vivo based on myelin content as revealed by T1- and T2-weighted MRI. J Neurosci. 2011 Aug 10;31(32):11597-616. doi: 10.1523/JNEUROSCI.2180-11.2011. PMID: 21832190; PMCID: PMC3167149.
 
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
 
@@ -37,7 +37,7 @@ We kindly ask that you cite the following articles when publishing papers and co
 
 ### On Brainlife.io
 
-You can submit this App online at [https://doi.org/10.25663/brainlife.app.553](https://doi.org/10.25663/brainlife.app.553) via the 'Execute' tab.
+You can submit this App online at [https://doi.org/10.25663/brainlife.app.478](https://doi.org/10.25663/brainlife.app.478) via the 'Execute' tab.
 
 ### Running Locally (on your machine)
 
@@ -47,35 +47,8 @@ You can submit this App online at [https://doi.org/10.25663/brainlife.app.553](h
 
 ```json
 {
-    "parcellation": "/input/parc/parc.nii.gz",
-    "key": "/input/parc/key.nii.gz",
-    "label": "/input/parc/label.nii.gz",
-    "freesurfer": "/input/freesurfer/output",
-    "fa": "/input/tensor/fa.nii.gz",
-    "md": "/input/tensor/md.nii.gz",
-    "rd": "/input/tensor/rd.nii.gz",
-    "ad": "/input/tensor/ad.nii.gz",
-    "cl": "/input/tensor/cl.nii.gz",
-    "cp": "/input/tensor/cp.nii.gz",
-    "cs": "/input/tensor/cs.nii.gz",
-    "tensors": "/input/tensor/tensors.nii.gz",
-    "kurtosis": "/input/tensor/kurtosis.nii.gz",
-    "dir": "/input/noddi/dir.nii.gz",
-    "ndi": "/input/noddi/ndi.nii.gz",
-    "isovf": "/input/noddi/isovf.nii.gz",
-    "odi": "/input/noddi/odi.nii.gz",
-    "myelin": "/input/myelin/map.nii.gz",
-    "T1": "/input/qmri/T1map.nii.gz",
-    "T1_json": "/input/qmri/T1map_json.nii.gz",
-    "R1": "/input/qmri/R1map.nii.gz",
-    "R1_json": "/input/qmri/R1map_json.nii.gz",
-    "M0": "/input/qmri/M0map.nii.gz",
-    "M0_json": "/input/qmri/M0map_json.nii.gz",
-    "PD": "/input/qmri/PD.nii.gz",
-    "MTV": "/input/qmri/MTV.nii.gz",
-    "VIP": "/input/qmri/VIP.nii.gz",
-    "SIR": "/input/qmri/SIR.nii.gz",
-    "WF": "/input/qmri/WF.nii.gz"
+    "t1": "/input/t1/t1.nii.gz",
+    "t2": "/input/t2/t2.nii.gz"
 }
 ```
 
@@ -98,7 +71,7 @@ bl dataset download
 
 ## Output
 
-The main output of this App is a parc-stats datatype containing a csv file containing data for each measure and parcel within the volumated input parcellation.
+The main output of this App is a myelin-map datatype.
 
 #### Product.json
 
@@ -109,13 +82,6 @@ The secondary output of this app is `product.json`. This file allows web interfa
 This App only requires [singularity](https://www.sylabs.io/singularity/) to run. If you don't have singularity, you will need to install following dependencies.   
 
 - Freesurfer: https://surfer.nmr.mgh.harvard.edu/
-- FSL: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
-- python3: https://www.python.org/downloads/
-- pandas: https://pandas.pydata.org/
-- numpy: https://numpy.org/
-- matlab: https://www.mathworks.com/products/matlab.html
-- vistasoft: https://github.com/vistalab/vistasoft
-- jsonlab: https://github.com/fangq/jsonlab
-- wma_tools: https://github.com/DanNBullock/wma_tools
+- Connectome Workbench: https://www.humanconnectome.org/software/connectome-workbench
 
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
