@@ -1,9 +1,9 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.478-blue.svg)](https://doi.org/10.25663/brainlife.app.478)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.401-blue.svg)](https://doi.org/10.25663/brainlife.app.401)
 
-# Compute myelin map using T1w / T2w ratio
+# Generate Tract Overlays on Anatomical Image
 
-This app will compute a myelin-map by computing the ratio between the T1w and T2w images following methodologies outlined in Glasser et al (2011).
+This app will generate images of tracts overlaid on Anatomical T1w images. This is intended to be used for generating figures. Will take a long time to run.
 
 ### Authors
 
@@ -11,11 +11,11 @@ This app will compute a myelin-map by computing the ratio between the T1w and T2
 
 ### Contributors
 
-- Soichi Hayashi(shayashi@iu.edu)
+- Soichi Hayashi (shayashi@iu.edu)
 
 ### Funding Acknowledgement
 
-brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code. 
+brainlife.io is publicly funded and for the sustainability of the project it is helpful to Acknowledge the use of the platform. We kindly ask that you acknowledge the funding below in your publications and code reusing this code.
 
 [![NSF-BCS-1734853](https://img.shields.io/badge/NSF_BCS-1734853-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1734853)
 [![NSF-BCS-1636893](https://img.shields.io/badge/NSF_BCS-1636893-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1636893)
@@ -29,15 +29,13 @@ We kindly ask that you cite the following articles when publishing papers and co
 
 1. Avesani, P., McPherson, B., Hayashi, S. et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6, 69 (2019). https://doi.org/10.1038/s41597-019-0073-y
 
-2. Glasser MF, Van Essen DC. Mapping human cortical areas in vivo based on myelin content as revealed by T1- and T2-weighted MRI. J Neurosci. 2011 Aug 10;31(32):11597-616. doi: 10.1523/JNEUROSCI.2180-11.2011. PMID: 21832190; PMCID: PMC3167149.
-
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
 
 ## Running the App
 
 ### On Brainlife.io
 
-You can submit this App online at [https://doi.org/10.25663/brainlife.app.478](https://doi.org/10.25663/brainlife.app.478) via the 'Execute' tab.
+You can submit this App online at [https://doi.org/10.25663/brainlife.app.401](https://doi.org/10.25663/brainlife.app.401) via the 'Execute' tab.
 
 ### Running Locally (on your machine)
 
@@ -47,8 +45,16 @@ You can submit this App online at [https://doi.org/10.25663/brainlife.app.478](h
 
 ```json
 {
-    "t1": "/input/t1/t1.nii.gz",
-    "t2": "/input/t2/t2.nii.gz"
+    "anat": "/input/anat/t1.nii.gz",
+    "classification": "/input/classification/classification.mat",
+    "tracts": "/input/classification/tracts",
+    "surfaces": "/input/classification/surfaces",
+    "track": "/input/track/track.nii.gz",
+    "colors": "0 1 0",
+    "tractIndices": "1 2",
+    "slices": "-1 0 0",
+    "figView":  "sagittal",
+    "subsample":  1000
 }
 ```
 
@@ -71,7 +77,7 @@ bl dataset download
 
 ## Output
 
-The main output of this App is a myelin-map datatype.
+The main output of this App is a raw datatype containing images of tracts overlaid on the anatomy.
 
 #### Product.json
 
@@ -81,7 +87,10 @@ The secondary output of this app is `product.json`. This file allows web interfa
 
 This App only requires [singularity](https://www.sylabs.io/singularity/) to run. If you don't have singularity, you will need to install following dependencies.   
 
-- Freesurfer: https://surfer.nmr.mgh.harvard.edu/
-- Connectome Workbench: https://www.humanconnectome.org/software/connectome-workbench
+- matlab: https://www.mathworks.com/products/matlab.html
+- vistasoft: https://github.com/vistalab/vistasoft
+- wma_tools: https://github.com/DanNBullock/wma_tools
+- jsonlab: https://github.com/fangq/jsonlab
+- mba: https://github.com/francopestilli/mba
 
 #### MIT Copyright (c) 2020 brainlife.io The University of Texas at Austin and Indiana University
